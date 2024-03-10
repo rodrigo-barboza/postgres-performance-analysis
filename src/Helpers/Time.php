@@ -22,4 +22,9 @@ class Time
     {
         return number_format(($this->end_time - $this->begin_time), $precision);
     }
+
+    public function blockAvg(int $block_size, int $precision = 4): string
+    {
+        return number_format(($this->elapsedTime() / $block_size), $precision);
+    }
 }
