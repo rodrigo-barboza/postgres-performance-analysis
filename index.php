@@ -46,8 +46,8 @@ foreach($pipeline as $name => $operation) {
 
     $time->startTime();
 
-    foreach(range(0, $loop_size) as $loop_index) {
-        foreach(range(0, $block_size) as $block_index) {
+    foreach(range(1, $loop_size) as $loop_index) {
+        foreach(range(1, $block_size) as $block_index) {
             $playground->{$operation}($primary_key);
             $time->endTime();
             $primary_key++;
