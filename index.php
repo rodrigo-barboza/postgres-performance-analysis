@@ -27,8 +27,8 @@ echo 'Banco de dados e tabela criados.' . PHP_EOL;
 
 $report = new File();
 
-$loop_size  = 10;
-$block_size  = 30;
+$loop_size  = 100;
+$block_size  = 10000;
 
 $pipeline = [
     'inserts' => 'runInsert',
@@ -37,28 +37,30 @@ $pipeline = [
 ];
 
 foreach($pipeline as $name => $operation) {
-    $time = new Time();
+    $operation_time = new Time();
     $primary_key = 1;
 
     echo  PHP_EOL . 'Iniciando: ' . $name .'...' . PHP_EOL;
 
     $report->putLine("r;$name(s)");
 
-    $time->startTime();
+    $operation_time->startTime();
 
     foreach(range(1, $loop_size) as $loop_index) {
+        $block_time = new Time();
+        $block_time->startTime();
         foreach(range(1, $block_size) as $block_index) {
             $playground->{$operation}($primary_key);
-            $time->endTime();
             $primary_key++;
         }
-        $avg = $time->blockAvg($block_size);
+        $block_time->endTime();
+        $avg = $block_time->blockAvg($block_size);
         $report->putLine("$loop_index;$avg");
     }
 
-    $time->endTime();
+    $operation_time->endTime();
 
-    echo 'Finalizado(' . $name .'). Em: ' . $time->elapsedTime() . ' s' . PHP_EOL;
+    echo 'Finalizado(' . $name .'). Em: ' . $operation_time->elapsedTime() . ' s' . PHP_EOL;
 }
 
 $report->save();

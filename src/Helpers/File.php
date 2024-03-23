@@ -10,7 +10,7 @@ class File
 
     public function putLine(string $line): void
     {
-        $this->content .= $line . "\n";
+        $this->content .= str_replace('.', ',', $line) . "\n";
     }
 
     public function save(): void

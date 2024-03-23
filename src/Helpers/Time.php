@@ -18,12 +18,12 @@ class Time
         $this->end_time = microtime(true);
     }
 
-    public function elapsedTime(int $precision = 4): string
+    public function elapsedTime(int $precision = 10): string
     {
         return number_format(($this->end_time - $this->begin_time), $precision);
     }
 
-    public function blockAvg(int $block_size, int $precision = 4): string
+    public function blockAvg(int $block_size, int $precision = 10): string
     {
         return number_format(($this->elapsedTime() / $block_size), $precision);
     }
