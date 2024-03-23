@@ -29,7 +29,7 @@ abstract class PostgresManager extends Database
         }
     }
 
-    public function dropTabeIfExists(string $table_name): void
+    public function dropTableIfExists(string $table_name): void
     {
         $query = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = :table)";
 
@@ -46,7 +46,7 @@ abstract class PostgresManager extends Database
 
     public function migrate(): void
     {
-        $this->dropTabeIfExists('testing_ads');
+        $this->dropTableIfExists('testing_ads');
         $this->createDefaultTable('testing_ads');
     }
 }

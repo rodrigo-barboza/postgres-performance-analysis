@@ -25,7 +25,7 @@ abstract class Database
 
     public abstract function createDefaultTable(string $table_name): void;
 
-    public abstract function dropTabeIfExists(string $table_name): void;
+    public abstract function dropTableIfExists(string $table_name): void;
 
     public abstract function migrate(): void;
 }
